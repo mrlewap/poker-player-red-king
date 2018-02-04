@@ -1,7 +1,7 @@
 
 class Table:
 
-    def countPeopeleInAllIn(self, game_state):
+    def countPeopleInAllIn(self, game_state):
         player_in_all_in = 0
 
         for player in game_state['players']:
@@ -19,7 +19,7 @@ class Table:
 
         return player_in_all_out
 
-    def maxBetWithoutPlayer(self, game_state):
+    def notOurMaxBet(self, game_state):
         player_index = game_state['in_action']
         id = game_state['players'][player_index]['id']
         max_bet = 0
@@ -28,14 +28,14 @@ class Table:
             if player['id'] != id and player['bet'] > max_bet:
                 max_bet = player['bet']
 
-        return player_index
+        return max_bet
 
     def ourBet(self, game_state):
         player_index = game_state['in_action']
         return game_state['players'][player_index]['bet']
 
     def isBigBB(self, game_state):
-        return (self.maxBetWithoutPlayer(game_state) - self.ourBet(game_state)) > game_state['small_blind'] * 2
+        return (self.notOurMaxBet(game_state) - self.ourBet(game_state)) > game_state['small_blind'] * 2
 
     def getCurrentRound(self, game_state):
         return game_state['round']
