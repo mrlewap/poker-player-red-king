@@ -32,7 +32,10 @@ class Hand:
                 else:
                     return 0
             else:
-                return \
+                if self.slagCards():
+                    return 0
+                else:
+                    return \
                     game_state['current_buy_in'] - game_state['players'][player_index]['bet'] + game_state['minimum_raise']
 
     def notOurBetIsGreaterThanBB(self, game_state):
