@@ -17,7 +17,7 @@ class Hand:
                 self.resolveValue(self.cards_in_hand[1].card_value) >= 10 and \
                 self.isPairSute():
             return game_state['players'][game_state['in_action']]['stack']
-        elif game_state['current_buy_in'] == game_state['player'][player_index]['bet']:
+        elif game_state['current_buy_in'] == (game_state['small_blind'] * 2):
             return game_state['current_buy_in'] - game_state['players'][player_index]['bet'] + game_state['minimum_raise']
         else:
             return 0
