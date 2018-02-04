@@ -9,7 +9,6 @@ class Table:
 
         return player_in_all_in
 
-
     def countPeopleInOut(self, game_state):
         player_in_all_out = 0
 
@@ -18,7 +17,6 @@ class Table:
                 player_in_all_out += 1
 
         return player_in_all_out
-
 
     def maxBet(self, game_state):
         player_index = game_state['in_action']
@@ -31,11 +29,9 @@ class Table:
 
         return player_index
 
-
     def ourBet(self, game_state):
         player_index = game_state['in_action']
         return game_state['players'][player_index]['bet']
-
 
     def isBigBB(self, game_state):
         return (self.maxBet(game_state) - self.ourBet(game_state)) > self.maxBet(game_state) ** 2
