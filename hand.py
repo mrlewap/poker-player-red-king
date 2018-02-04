@@ -32,3 +32,9 @@ class Hand:
             return 14
         else:
             return int(value)
+
+
+    def isPairSute(self):
+        return self.cards_in_hand[0].card_suit == self.cards_in_hand[1].card_suit
+
+
