@@ -41,8 +41,8 @@ class Hand:
                 else:
                     return 0
             else:
-                if game_state['current_buy_in'] < 30:
-                    return 0
+                # if game_state['current_buy_in'] < 30:
+                    # return 0
 
                 if self.slagCards():
                     return 0
