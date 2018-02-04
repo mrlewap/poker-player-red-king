@@ -1,4 +1,5 @@
 from card import Card
+from table import Table
 
 class Hand:
     def __init__(self):
@@ -10,11 +11,20 @@ class Hand:
             self.cards_in_hand.append(card)
 
     def resolveStrategy(self, game_state, player_index):
+        table = Table()
+        if table.countPeopleInActive(game_state) == 1:
+            current_max = game_state['current_buy_in']
+            if (current_max - table.ourBet(game_state)) <= game_state['small_blind'] * 2:
+                return game_state['current_buy_in'] - game_state['players'][player_index]['bet']
+
         if self.betGreaterThanBB(game_state):
             if self.isInRedZone(game_state):
                 return game_state['players'][game_state['in_action']]['stack']
             else:
-                return 0
+                if table.searchActivePlayerByName(game_state, 'PolniyDom') and self.isInOrangeZone(game_state):
+                   return game_state['players'][game_state['in_action']]['stack']
+                else:
+                    return 0
         else:
             if self.notOurBetIsGreaterThanBB(game_state):
                 if self.isInRedZone(game_state):
@@ -36,6 +46,15 @@ class Hand:
         if self.resolveValue(self.cards_in_hand[0].card_value) >= 10 and \
                 self.resolveValue(self.cards_in_hand[1].card_value) >= 10 and \
                 self.isPairSute():
+            return True
+
+        return False
+
+    def isInOrangeZone(self, game_state):
+        if self.resolveValue(self.cards_in_hand[0].card_value) == self.resolveValue(self.cards_in_hand[1].card_value):
+            return True
+
+        if self.resolveValue(self.cards_in_hand[0].card_value) >= 9 and self.resolveValue(self.cards_in_hand[1].card_value) >= 9:
             return True
 
         return False
