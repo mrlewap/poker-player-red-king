@@ -57,8 +57,14 @@ class Hand:
         else:
             return int(value)
 
-
     def isPairSute(self):
         return self.cards_in_hand[0].card_suit == self.cards_in_hand[1].card_suit
 
+    def slagCards(self):
+        if ((self.resolveValue(self.cards_in_hand[0].card_value) <= 6) and (self.resolveValue(self.cards_in_hand[1].card_value) <= 9))\
+                or ((self.resolveValue(self.cards_in_hand[1].card_value) <= 6) and (self.resolveValue(self.cards_in_hand[0].card_value) <= 9))\
+                and not self.isPairSute():
+            return True
+        else:
+            return False
 
