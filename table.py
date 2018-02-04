@@ -19,6 +19,15 @@ class Table:
 
         return player_in_all_out
 
+    def countPeopleInActive(self, game_state):
+        player_in_all_active = 0
+
+        for player in game_state['players']:
+            if player["status"] == "active":
+                player_in_all_active += 1
+
+        return player_in_all_active
+
     def notOurMaxBet(self, game_state):
         player_index = game_state['in_action']
         id = game_state['players'][player_index]['id']
