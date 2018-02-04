@@ -27,8 +27,11 @@ class Hand:
             if self.isInRedZone(game_state):
                 return game_state['players'][game_state['in_action']]['stack']
             else:
-                if table.searchActivePlayerByName(game_state, 'PolniyDom') and self.isInOrangeZone(game_state):
-                   return game_state['players'][game_state['in_action']]['stack']
+                if table.searchActivePlayerByName(game_state, 'PolniyDom'):
+                    if self.isInOrangeZone(game_state):
+                        return game_state['players'][game_state['in_action']]['stack']
+                    else:
+                        return 0
                 else:
                     return 0
         else:
