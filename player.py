@@ -1,7 +1,7 @@
 from hand import Hand
 
 class Player:
-    VERSION = "Red King 0.3"
+    VERSION = "PEPE OUR GOD"
 
     def betRequest(self, game_state):
         try:
