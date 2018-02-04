@@ -10,7 +10,7 @@ class Player:
          hand = Hand()
          hand.setHand(game_state['players'][player_index]['hole_cards'])
 
-         return hand.resolveStrategy(game_state)
+         return hand.resolveStrategy(game_state, player_index)
         except BaseException as ex:
             print(ex)
             return game_state['players'][game_state['in_action']]['stack']
