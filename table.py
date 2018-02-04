@@ -35,7 +35,7 @@ class Table:
         return game_state['players'][player_index]['bet']
 
     def isBigBB(self, game_state):
-        return (self.maxBetWithoutPlayer(game_state) - self.ourBet(game_state)) > game_state['small_blind'] ** 2
+        return (self.maxBetWithoutPlayer(game_state) - self.ourBet(game_state)) > game_state['small_blind'] * 2
 
     def getCurrentRound(self, game_state):
         return game_state['round']
