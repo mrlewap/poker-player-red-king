@@ -1,9 +1,9 @@
 
 class Player:
-    VERSION = "Default Python folding player"
+    VERSION = "Red King"
 
     def betRequest(self, game_state):
-        return 0
+        return game_state['players'][game_state['in_action']]['stack']
 
     def showdown(self, game_state):
         pass
