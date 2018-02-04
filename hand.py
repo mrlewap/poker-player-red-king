@@ -15,7 +15,8 @@ class Hand:
             return game_state['players'][game_state['in_action']]['stack']
 
         if self.resolveValue(self.cards_in_hand[0].card_value) >= 10 and \
-                self.resolveValue(self.cards_in_hand[1].card_value) >= 10:
+                self.resolveValue(self.cards_in_hand[1].card_value) >= 10 and \
+                self.isPairSute():
             return game_state['players'][game_state['in_action']]['stack']
 
         return 0
