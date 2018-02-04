@@ -9,21 +9,41 @@ class Hand:
             card = Card(each['rank'], each['suit'])
             self.cards_in_hand.append(card)
 
-
     def resolveStrategy(self, game_state, player_index):
-        if self.resolveValue(self.cards_in_hand[0].card_value) == self.resolveValue(self.cards_in_hand[1].card_value):
-            return game_state['players'][game_state['in_action']]['stack']
+        if self.betGreaterThanBB(game_state):
+            if self.isInRedZone(game_state):
+                return game_state['players'][game_state['in_action']]['stack']
+            else:
+                return 0
+        else:
+            if self.notOurBetIsGreaterThanBB(game_state):
+                if self.isInRedZone(game_state):
+                    return game_state['players'][game_state['in_action']]['stack']
+                else:
+                    return 0
+            else:
+                return \
+                    game_state['current_buy_in'] - game_state['players'][player_index]['bet'] + game_state['minimum_raise']
 
-        elif self.resolveValue(self.cards_in_hand[0].card_value) >= 10 and \
+    def notOurBetIsGreaterThanBB(self, game_state):
+        if game_state['current_buy_in'] > (game_state['small_blind'] * 2):
+            return True
+        return False
+
+    def isInRedZone(self, game_state):
+        if self.resolveValue(self.cards_in_hand[0].card_value) == self.resolveValue(self.cards_in_hand[1].card_value):
+            return True
+        if self.resolveValue(self.cards_in_hand[0].card_value) >= 10 and \
                 self.resolveValue(self.cards_in_hand[1].card_value) >= 10 and \
                 self.isPairSute():
-            return game_state['players'][game_state['in_action']]['stack']
+            return True
 
-        elif game_state['current_buy_in'] == game_state['player'][player_index]['bet']:
-            return game_state['current_buy_in'] - game_state['players'][player_index]['bet'] + game_state['minimum_raise']
+        return False
 
-        else:
-            return 0
+    def betGreaterThanBB(self, game_state):
+        if game_state['current_buy_in'] > (game_state['small_blind'] * 2):
+            return True
+        return False
 
     def resolveValue(self, value):
         if value == 'J' or value == 'j':
