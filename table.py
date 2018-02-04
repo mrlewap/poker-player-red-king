@@ -49,3 +49,9 @@ class Table:
     def getCurrentRound(self, game_state):
         return game_state['round']
 
+    def searchActivePlayerByName(self, game_state, name):
+        for each in game_state['players']:
+            if (each['name'] == name and each['status'] == 'active'):
+                return True
+
+        return False
